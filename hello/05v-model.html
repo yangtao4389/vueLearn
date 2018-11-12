@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+</head>
+
+
+
+<body>
+
+    <div id="app">
+        <p>{{msg}}</p>
+        <!-- v-bind实现数据的单向绑定，从m绑定到v中去  mvvm模式 -->
+        <!-- <input type="text" v-bind:value="msg" style="width: 100%;"> -->
+
+        <!-- 下面两种方式都可以，v-mode只能应用在表单元素中input，select，checkbox，实现双向绑定， -->
+        <!-- <input type="text" v-model:value="msg" style="width: 100%;"> -->
+        <input type="text" v-model="msg" style="width: 100%;">
+    </div>
+    <script>
+        // 2 创建一个vue实例
+        // 当我们导入vue的时候，浏览器的内存中，就多了一个vue构造函数
+
+        var vm = new Vue({
+            el:'#app', // 当前实例控制html页面的哪个区域
+            data:{  // data中存在的是el要用到的数据
+                msg:'v-model实现数据双向绑定',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+            }
+        })
+    </script>
+</body>
+
+</html>

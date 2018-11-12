@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./src/vue.js"></script>
+    <style>
+        .red：{
+            font-size: 50px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1 class="red">这里</h1>
+        <h1 :class="{red:true}">那里</h1>
+        <h1 :class=class_red>可以</h1>
+        <h1 :class="class_red">也可以</h1>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                class_red:{red:true}
+            },
+            methods:{},
+        })
+    </script>
+</body>
+</html>
+
+
+data = {
+    "callCount":1,
+    "page":"/main/sichuan/ordercheck/order_intial.action",
+    "httpSessionId":"591F428B6433A8834300AFC3216FAE37",
+    "scriptSessionId":"E063E947F2E4A6CC30CB51FDEA4EDDC6274",
+    "c0-scriptName":"EncodeBean",
+    "c0-methodName":"encrypt",
+    "c0-id":0,
+    "c0-param0":"string:2312042120181106183324646598",
+    "c0-param1":"string:vkWg0OObn3bves1wHYTGtYEuF2bF20dhbFLrwXlz",
+    "batchId":0,
+    }

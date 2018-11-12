@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+    <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.css">
+    <!-- 导入bootsrap -->
+</head>
+
+
+
+<body>
+
+
+
+    <div id="app">
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title" v-font-diy="50">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>
+                    id:
+                    <input type="text" class="form-control" v-model="id">
+                </label>
+                <label>
+                    <!-- 利用回车添加 -->
+                    NAME:
+                    <input type="text" class="form-control" v-model="name" @keyup.enter="add">
+                </label>
+                <!-- 在vue中使用事件绑定机制，为元素指定处理函数的时候，如果加了（），就可以为函数传参 -->
+                <input type="button" value="添加" class="btn btn-primary" @click="add" >
+                <label>
+                    搜索:
+                    <!-- 自定义v-focus指令 -->
+                    <input type="text" class="form-control" v-model="s_key" v-focus v-color="'red'" >
+                </label>
+
+
+            </div>
+            <div v-font-diy="20">
+                {{msg}}
+            </div>
+        </div>
+
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>CTIME</th>
+                    <th>OPTIONE</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a href="" @click.prevent="del(item.id)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+    <script>
+        // 2 创建一个vue实例
+        // 当我们导入vue的时候，浏览器的内存中，就多了一个vue构造函数
+        // import moment from 'moment';
+        // 定义全局过滤器
+        Vue.filter("formatDate", function (data) {
+            if (data) {
+                return moment(String(value)).format('MM/DD/YYYY hh:mm')
+            }
+        })
+
+
+
+        // 定义全局指令,定义时不需要前缀，调用的时候必须加v-
+        // 
+        Vue.directive('focus', {
+            // 当被绑定的元素插入到 DOM 中时……
+            inserted: function (el) {
+                // 聚焦元素
+                el.focus()
+            }
+        })
+        
+        
+        // 样式相关的，跟bind执行，跟行为相关的，最好放inserted里面
+        Vue.directive("color",{
+            bind:function(el,binding){
+                el.style.color = binding.value
+                
+            }
+        })
+
+        Vue.directive("font-diy",function (el,binding) {
+            console.log(binding.value)
+            el.style.fontSize = binding.value + "px"
+        })
+
+        // 全局键盘嘛
+        Vue.config.keyCodes.f2 = 113
+        // 替换自带的enter按键
+        Vue.config.keyCodes.enter = 113
+
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: {  // data中存在的是el要用到的数据
+                msg: '欢迎学习vue',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+                list: [
+                    { id: 1, name: "奔驰", ctime: new Date() },
+                    { id: 2, name: "宝马", ctime: new Date() }
+                ],
+                name: null,
+                id: null,
+                s_key: null,
+            },
+            methods: {
+                add() {
+                    // 获取id，name，可以直接从data里面拿
+                    // 组织一个对象添加到list上去
+                    // 在vue中已经实现了数据的双向绑定，每当修改data的数据，vue会默认监听到这个改动，从而渲染页面
+                    var item = { id: this.id, name: this.name, ctime: new Date() }
+
+                    this.list.push(item);
+                    // 清空input
+                    this.id = this.name = null
+                },
+                del(id) {
+                    this.list.some((item, i) => {
+                        if (item.id == id) {
+                            this.list.splice(item, 1)
+                            return true;
+                        }
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./src/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-cloak>--{{msg}}旁边可以添加其他的内容，但是v-text会覆盖原本的内容</p>
+        <p v-text="msg">默认v-test没有网速慢闪烁问题,会覆盖这里写的text内容</p>
+        <p v-text='msg'>{{msg}},zheli </p>
+        <h1 v-text='msg'></h1>
+
+        <div>{{msg2}} {{}}去解析，会当成普通文本</div>
+        <div v-text='msg2'>当成普通字符串</div>
+        <div v-html='msg2'>解析为html标签</div>
+
+        <!-- 注意v-bind： 可以简写为： 后面跟属性  并且=后面的可以写成js表达式 -->
+        <!-- v-on  缩写@ 不带冒号 事件绑定 -->
+        <input type="button" value="按钮" v-bind:title="mytitle + '123' " v-on:click="show" >
+        <input type="button" value="按钮" v-bind:title="mytitle + '123' " v-on:mouseover="show" >
+        <input type="button" value="按钮" v-bind:title="mytitle + '123' " @mouseover="show" >
+    </div>
+   
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{ // 数据
+                msg:"123 x-text 或者 {{}}插值表达式",
+                msg2:"<h1>测试h1标签 x-html</h1>",
+                mytitle:"放属性 v-bind:title 简写方式：title  并且可以当js表达式解析  "
+            },
+            methods:{ // 当前vue实例所有可用的方法
+                show:function hello() {
+                    alert("hello world")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+</head>
+
+
+
+<body>
+
+    <div id="app">
+
+        <input type="button" value="浪起来" v-on:click="lang">
+        <input type="button" value="低调" @click="didao">
+
+        <p>{{msg}}</p>
+    </div>
+    <script>
+        // 2 创建一个vue实例
+        // 当我们导入vue的时候，浏览器的内存中，就多了一个vue构造函数
+
+        // 
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: {  // data中存在的是el要用到的数据
+                msg: '欢迎学习vue,慢慢浪~~~~~~~~',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+                intervalID:null
+            },
+            methods: {
+                lang() {
+                    if(this.intervalID != null)return;
+
+                    // console.log(msg)  获取不到数据，如果想要在内部获取vm对象内部的方法，或者数据，必须通过this 来搞定
+                    console.log(this.msg);
+                    //setInterval(function (that) {  // 这个this指向的是内部的，所以需要指向外部，当然可以通过that=this保存一份，然后再替换。当然还可以通过这种方式：
+                    this.intervalID = setInterval(  () => {
+                        var start = this.msg.substring(0, 1);  // 截取字符串第一个字符
+                        var end = this.msg.substring(1)  // 获取过后的所有字符
+                        console.log(start, end)
+                        this.msg = end + start;  // vm会自动监听所有数据的变化，然后更新到页面
+
+                    },500)
+
+
+                },
+                didao(){
+                    clearInterval(this.intervalID);
+                    this.intervalID = null;
+                }
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>
