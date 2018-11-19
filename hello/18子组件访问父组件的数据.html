@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+</head>
+
+
+
+<body>
+
+    <template id="tmp1">
+        <div>
+            <input type="button" value="button" @click="increase">
+            <h1>{{num}}</h1>
+        </div>
+    </template>
+
+    <div id="app">
+
+
+
+        <h1>这是一个父组件--{{this.msg}}</h1>
+
+        <!-- 父组件可以通过属性绑定，v-bind的形式，把需要绑定的数据传递给子组件的数据 -->
+        <com1 v-bind:parentmsg="msg"></com1>
+
+    </div>
+
+    <script>
+      
+
+
+
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: {  // data中存在的是el要用到的数据
+                msg: '欢迎学习vue',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+            },
+            components:{
+                com1:{
+                    // 直接这样引用是访问不到data数据的
+                    // template:"<h1>这是一个父组件--{{this.msg}}</h1>",
+                    template:"<h1>这是一个父组件--{{parentmsg}}</h1>",
+                    props:[
+                        'parentmsg' ,// 把父组件传过来的属性，在props里面定义一下，子组件就可以使用
+                    ]
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

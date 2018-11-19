@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+    <script src="./src/vue.js"></script>
+    <script src="./src/vue-router.js"></script>
+    <link rel="stylesheet" href="./src/bootstrap.css">
+
+    <style>
+        .header{
+            background-color: lightgreen;
+        }
+        .container{
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        .left{
+            background-color:lightblue;
+            flex: 2;
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            background-color: lightcoral;
+            flex: 8;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <div id="app">
+        <p>经典布局，上部header，左边left，右边主视图main</p>
+        <p>执行的时候，先实现3个组件</p>
+        <p>然后再创建3个router-view 占位，也顺带注册3个router   </p>
+
+        <router-view></router-view>
+        
+        <div class="container">
+               <!-- 指定name属性，去 routes 匹配到的path中找components  -->
+        <router-view name="left" ></router-view>  
+        <router-view name="main"></router-view>
+        </div>
+        
+  
+     
+
+    </div>
+
+
+    <template id="header">
+        <div class="header">
+            <h1>这是header区</h1>
+
+        </div>
+    </template>
+    <template id="left">
+        <div class="left">
+            <h1>这是左边区</h1>
+        </div>
+    </template>
+    <template id="main">
+        <div  class="main">
+            <h1>这是右边主视图区</h1>
+        </div>
+    </template>
+
+
+    <script>
+        var header = {
+            template: "#header"
+        }
+        var left = {
+            template: "#left"
+        }
+        var main = {
+            template: "#main"
+        }
+
+        var router = new VueRouter({
+            routes:[
+                // {path:"/",component:header},
+                // {path:"/left",component:left},
+                // {path:"/main",component:main},
+
+                {path:"/",components:{
+                    default:header,
+                    left:left,
+                    main:main
+                }},
+            ]
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            },
+            router: router,
+
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+</head>
+
+
+
+<body>
+
+    <template id="tmp1">
+        <div>
+            <input type="button" value="button">
+            <h1>hhhhhhhhhhhhhhh</h1>
+            <h2>必须定义在app外面，否则会重复</h2>
+        </div>
+    </template>
+
+    <div id="app">
+        <p>{{msg}}</p>
+        <!-- 将名称以标签形式引用，但是标签不能大写，所以注册组件的时候，建议用小写代替-->
+        <mycom1></mycom1>
+        <mycom2></mycom2>
+        <!-- <input type="button" value="dingyi">
+        <h3>hhh</h3> -->
+
+        <!-- 第四种组件引用 -->
+        <mycom3></mycom3>
+
+    </div>
+
+    <script>
+        // 定义组件的第一种模式，使用vue.extend 来创建组件
+        // var com1 = Vue.extend({
+        //     template:"<p>这是一个Vue.extend创建的p标签</p>",// 指定了组件要展示的html结构
+        // })
+        // Vue.component("mycom1",com1)
+
+
+        // 第二种方式：第一个参数为组件的名称，将来用它作为标签来引入
+        Vue.component("mycom1", Vue.extend({
+            template: "<p>这是一个Vue.extend创建的p标签</p>  ",// 指定了组件要展示的html结构
+        }))
+
+        // 第三种  这种不支持多个root标签
+        Vue.component("mycom2", {
+            template: "<div>   <p>这是一个Vue.extend创建的p标签 方式2</p> <h3>hhh</h3></div>",
+        })
+
+        // 第四种，直接通过template标签形式来实现
+        Vue.component("mycom3", {
+            template: "#tmp1"
+        })
+
+
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: {  // data中存在的是el要用到的数据
+                msg: '欢迎学习vue',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+            }
+        })
+    </script>
+</body>
+
+</html>

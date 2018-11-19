@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+    <link rel="stylesheet" href="./src/animate.css">
+
+    <style>
+        .v-enter{
+            opacity: 0;
+        };
+        .v-leave-to{
+            opacity: 1;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <div id="app">
+ 
+
+        <input type="button" value="点击显示或隐藏标签" @click="flag=!flag">
+        <!-- transition vue官方提供的动画标签 -->
+        <!--  进场动画使用animate.css里面的样式 -->
+        <transition enter-active-class="animated bounceIn" leave-active-class="animated  slideInUp" :duration="1000">
+            <p v-if="flag">{{msg}}</p>
+        </transition>
+    </div>
+    <script>
+        // 2 创建一个vue实例
+        // 当我们导入vue的时候，浏览器的内存中，就多了一个vue构造函数
+
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: {  // data中存在的是el要用到的数据
+                msg: '欢迎学习vue',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+                flag: false,
+            }
+        })
+    </script>
+</body>
+
+</html>

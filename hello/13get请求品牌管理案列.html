@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+    <script src="./src/vue-resource.js"></script>
+    <link rel="stylesheet" href="./bootstrap-3.3.7/css/bootstrap.css">
+</head>
+
+
+
+<body>
+
+    <div id="app">
+        <!-- <p>{{msg}}</p> -->
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">品牌案例</h3>
+            </div>
+            <div class="panel-body" >
+                <!-- <label for="">
+                        ID:
+                        <input type="text" v-model="id">
+                    </label> -->
+                    
+                    <form action="" method="POST" class="form-inline" role="form">
+                    
+                        <div class="form-group">
+                            <!-- <label class="sr-only" for="">不显示？？</label> -->
+                            <label for="">名称</label>
+                            <input type="email" class="form-control" id="" placeholder="输入名称">
+                        </div>
+                    
+                        
+                    
+                        <button type="submit" class="btn btn-primary" @click.prevent="del">添加</button>
+                    </form>
+<!--                     
+                <label for="" >
+                    NAME:
+                    <input type="text" v-model="name">
+                </label>
+
+
+             
+                <button type="button" class="btn btn-primary">添加</button> -->
+             
+
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>code</th>
+                    <th>symbol</th>
+                    <th>rate</th>
+                    <th>description</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list">
+                    <td>{{item.code}}</td>
+                    <td>{{item.symbol}}</td>
+                    <td>{{item.rate}}</td>
+                    <td>{{item.description}}</td>
+                    <td>
+                        <a href="" @click.prevent="del">删除</a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        // 2 创建一个vue实例
+        // 当我们导入vue的时候，浏览器的内存中，就多了一个vue构造函数
+
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: {  // data中存在的是el要用到的数据
+                msg: '欢迎学习vue',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+                list: [
+                    { id: 1, name: "五菱宏光", time: new Date() },
+                    { id: 2, name: "昌林", time: new Date() },
+                ]
+            },
+            created(){
+                // data跟method初始化完成后，这里会自动执行
+                this.getAllLIst()
+            },
+            methods: {
+                del() {
+                    alert("delete")
+                },
+                getAllLIst(){
+                    // vue-resource.js 可以直接通过this.$http 发送请求 this.$http.get(url).then(function(response){})
+                    this.$http.get("https://api.coindesk.com/v1/bpi/currentprice.json").then(response => {
+                        console.log(response)
+                        this.list = response.body.bpi
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

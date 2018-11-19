@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+    <script src="./src/vue.js"></script>
+    <script src="./src/vue-router.js"></script>
+    <link rel="stylesheet" href="./src/bootstrap.css">
+
+    <!-- 定义router选中 -->
+    <style>
+  
+        .router-link-active {
+            color: red;
+            font-weight: 800;
+            font-size: 50px;
+        }
+
+        ;
+    </style>
+</head>
+
+
+
+<body>
+
+    <div id="app">
+
+        <!-- 这种方式不推荐 -->
+        <!-- <a href="#/login">登录</a>
+        <a href="#/register">注册</a> -->
+
+        <!-- router-link 默认渲染a标签 tag 用于改变标签-->
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <!-- 这是vue-router提供的标签，专门用来当做占位符，如果匹配到该路由，则 -->
+        <router-view></router-view>
+    </div>
+
+
+
+
+    <script>
+
+        // 登录组件
+        var login = {
+            template: "<h1>this is login template Obj--{{$route.path}}</h1>",
+            created(){
+                // 查看route对象  只当该组件被调用的时候启用
+                console.log(this.$route)  // 该对象有fullpath，path，query等route相关属相
+            }
+        }
+        var register = {
+            template: "<h1>this is register template Obj</h1>"
+        }
+
+        // 创建一个路由对象
+        // 可以为其传递一个对象{}
+        var routerObj = new VueRouter(
+            {
+                //路由匹配规则
+                // 每个对象都有path，表示监听哪个地址，属性2，component，组件，如果是匹配path，则展示component,必须为组件模板对象
+                routes: [
+                    // {path:"/",component:login}, // 用于监听根路径
+                    { path: "/", redirect: "/login" }, // 重定向
+                    { path: "/login", component: login },
+                    { path: "/register", component: register },
+                ]
+
+            }
+        )
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            },
+            router: routerObj,  // 将路由规则对象注册到vm实例上用于监听路由
+         
+        })
+
+    </script>
+</body>
+
+</html>

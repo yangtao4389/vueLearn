@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+</head>
+
+
+
+<body>
+
+    <template id="tmp1">
+        <div>
+            <h1>注册主键tmp1</h1>
+            <input type="button" value="这是子组件按钮，点击触发传递过来的方法" v-on:click="myclick">
+        </div>
+    </template>
+
+    <div id="app">
+
+
+
+        <h1>这是一个父组件--{{this.msg}}</h1>
+
+        <!-- 父组件向子组件传递方法 当我们字定义一个事件属性之后，子组件就能通过某种方式来调用传递-->
+        <comp2 v-on:func="show"></comp2>
+
+    </div>
+
+    <script>
+
+        var comp2 = {
+            template: "#tmp1",
+            methods:{
+                myclick(){
+                    // 怎么拿到父组件传来的方法  $emit为触发 func
+                    console.log("点击click")
+                    this.$emit('func',"参数1")
+                }
+            }
+        }
+
+
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: {  // data中存在的是el要用到的数据
+                msg: '欢迎学习vue',// 通过vue提供的指令可以很方便渲染数据到页面上，不再手动操作元素
+            },
+            methods:{
+                show(data){
+                    console.log("这是一个show方法" + data)
+                }
+            },
+            components:{
+                "comp2":comp2,  // 可以简写为  comp2
+
+            }
+        })
+    </script>
+</body>
+
+</html>

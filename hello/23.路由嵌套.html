@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+    <script src="./src/vue.js"></script>
+    <script src="./src/vue-router.js"></script>
+    <link rel="stylesheet" href="./src/bootstrap.css">
+
+    <!-- 定义router选中 -->
+
+</head>
+
+
+
+<body>
+
+    <div id="app">
+        <router-link to="/account">account</router-link>
+        <router-view> </router-view>
+
+    </div>
+
+    <template id="account">
+        <div>
+            <p>这是一个account组件</p>
+            <p>下面的这两条链接是应该基于account的，否则直接到自己定义的组件中，就会不显示上面的p标签</p>
+            <router-link to="/login">root下面的登录</router-link>
+            <router-link to="/register">root下面的注册</router-link>
+            <hr>
+            <router-link to="/account/login">account路由下面的登录</router-link>
+            <router-link to="/account/register">account路由下面的注册</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+
+
+    <!-- <h3>这是登录组件</h3> -->
+
+    <script>
+        var account = {
+            template: "#account"
+            
+        }
+
+        var login = {
+            template: "<h3>这是登录组件</h3>"
+        }
+
+        var register = {
+            template: "<h3>这是注册组件</h3>"
+        }
+
+        var routerObj = new VueRouter({
+            routes: [
+                {
+                    path: "/account",
+                    component: account,
+                    children: [
+                        { path: "login", component: login },
+                        { path: "register", component: register },
+                    ]
+                },
+                // { path: "/account/login", component: login },
+                // { path: "/account/register", component: register },
+            ]
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            },
+            router: routerObj,
+
+        })
+
+    </script>
+</body>
+
+</html>

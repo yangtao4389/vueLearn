@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+    <link rel="stylesheet" href="./src/bootstrap.css">
+</head>
+
+
+
+<body>
+
+    <div id="app">
+        <input type="button" @click="getElement" value="点击获取组件属相">
+
+        <h3 ref="ah3">this is life</h3>
+    </div>
+
+ 
+    <script>
+      
+        var vm = new Vue({
+           el:"#app",
+           data:{
+
+           },
+           methods:{
+               getElement(){
+                   console.log(document.getElementById("app").innerText)
+
+                //    通过在标签上定义ref属性来获取标签的值
+                   console.log(this.$refs.ah3.innerText)
+               }
+           },
+
+        })
+
+    </script>
+</body>
+
+</html>

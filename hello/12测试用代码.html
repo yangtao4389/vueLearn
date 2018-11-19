@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1导入vue的包 -->
+    <script src="./src/vue.js"></script>
+</head>
+
+
+
+<body>
+    <div id="app">
+        <p>{{foo}}</p>
+        <button v-on:click="foo = 'baz'">change it</button>
+    </div>
+    <!-- <div id="app">
+        <p>{{ foo }}</p>
+        <!-- 这里的 `foo` 不会更新！ -->
+        <!-- <button v-on:click="foo = 'baz'">Change it</button>
+    </div> --> 
+    <!-- <div id="app">
+        <p>{{foo}}</p>
+        <input type="text" v-model="foo">
+    </div> -->
+    <script>
+        // 2 创建一个vue实例
+        // 当我们导入vue的时候，浏览器的内存中，就多了一个vue构造函数
+        var obj = { foo: "bar" }
+        Object.freeze(obj)
+        var vm = new Vue({
+            el: '#app', // 当前实例控制html页面的哪个区域
+            data: obj,
+        })
+    </script>
+</body>
+
+</html>
