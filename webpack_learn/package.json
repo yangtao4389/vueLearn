@@ -1,0 +1,12 @@
+{
+  "name": "webpack_learn",
+  "version": "1.0.0",
+  "description": "dist  \r     发布版，发布的文件都可以放里面去\r src \r     源代码",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
