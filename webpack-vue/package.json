@@ -1,0 +1,21 @@
+{
+  "name": "webpack-vue",
+  "version": "1.0.0",
+  "description": "https://www.bilibili.com/video/av27969216/?p=110",
+  "main": "index.js",
+  "dependencies": {
+    "vue": "^2.6.5"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --open --hot "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
