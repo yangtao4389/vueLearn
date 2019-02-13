@@ -39,26 +39,29 @@ console.log(Pserson2.info)
 import Vue from 'vue'  // 在webpack中直接这样导入，vue的功能是不完整的，仅仅为runtime-only格式，非直接script引用的完整版本
 // import Vue from '../node_modules/vue/dist/vue.js'  // 这样可以，但是不推荐
 // 直接在webpack.config.js中配置
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
+import router from "./router.js"
 import login from "./login.vue"
-
 var vm = new Vue({
     el:"#app",
     data:{
         msg:"123"
     },
-
+    router: router,
     // 两种方式都可以
     // 1
-    // components:{
-    //     login
-    // },
-    // 2.该渲染的会直接覆盖所有内容，感觉不好用
-    render:function(createElements){
-        return createElements(login)
+    components:{
+        login
     },
+    // 2.该渲染的会直接覆盖所有内容，感觉不好用
+    // render:function(createElements){
+    //     return createElements(login)
+    // },
     // 上述等价于：
     // render:c => c(login)
+
 
 
 })

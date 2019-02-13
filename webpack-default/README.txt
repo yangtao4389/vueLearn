@@ -178,6 +178,34 @@ const { VueLoaderPlugin } = require('vue-loader')
 
 
 
+webpack  配置 vue-router
+npm install --save-dev vue-router 
+main.js中输入：
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+使用：
+var router = new VueRouter({
+    routes:[
+        {path:'/account',component:account},
+        {path:'/goodslist',component:goodslist},
+    ]
+})
+然后还要注入到vm里面
+index.html使用：
+    <router-link to="/account">account</router-link>
+    <router-link to="/goodslist">goodslist</router-link>
+
+    <router-view></router-view>
+
+最好将router分离出来为router.js
+
+
+
+
+
+
 
 
 
