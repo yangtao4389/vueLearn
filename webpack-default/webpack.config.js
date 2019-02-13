@@ -3,6 +3,13 @@ const path = require('path');
 // 如果要配置插件，需要在module.exports配置
 var htmlWebpackPlugin = require("html-webpack-plugin");
 
+
+// 配置vue
+
+const { VueLoaderPlugin } = require('vue-loader')
+
+
+
 // 入口出口文件配置
 module.exports = {
     mode: 'none',
@@ -15,7 +22,8 @@ module.exports = {
         new htmlWebpackPlugin({
             template: path.join(__dirname, "./src/index.html"),//指定模板文件路径
             filename: "index.html", // 设置生成的内存页面名称
-        })
+        }),
+        new VueLoaderPlugin(),
     ],
     module: {
         rules: [
@@ -53,11 +61,22 @@ module.exports = {
                       }
                 }
             },
+            // 处理vue
+            {
+                test:/\.vue$/,
+                use:'vue-loader'
+                //这一个loader当然是vue项目必须的加载器啦，不加其他规则的话，
+                //简单的这样引入就可以了，vue-loader会把vue单文件直接转成js。
+            },
         ]
     },
     resolve:{
         alias:{
-            "vue$":"vue/dist/vue.js"
+            //"vue$":"vue/dist/vue.js",
+            'vue$':'vue/dist/vue.esm.js',// 'vue/dist/vue.common.js' for webpack 1
+            //用@直接指引到src目录下，如：'./src/main'可以写成、'@/main'
+            // '@': path.resolve(__dirname,'./src'),
+
         }
     }
 };

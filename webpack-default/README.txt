@@ -144,6 +144,48 @@ You are using the runtime-only build of Vue where the template compiler is not a
 
 
 
+vue结合render
+复习网页创建组件的方式
+https://cn.vuejs.org/v2/guide/components.html
+
+webpack中使用
+首先在src下面建立login.vue的组件
+由3部分组成，template  script style
+然后在main.js中引入该组件
+import login from "./login.vue"
+会发现webpack无法解析vue
+去安装相关loader
+
+https://webpack.docschina.org/loaders/#%E6%A1%86%E6%9E%B6-frameworks-
+vue-loader 依赖于vue-template-compiler
+npm install --save-dev vue-loader vue-template-compiler
+{
+                test:/\.vue$/,
+                loader:'vue-loader'
+                //这一个loader当然是vue项目必须的加载器啦，不加其他规则的话，
+                //简单的这样引入就可以了，vue-loader会把vue单文件直接转成js。
+            },
+
+但不行，还需要配置plugin 参考：https://blog.csdn.net/qq_37160067/article/details/80141952
+const { VueLoaderPlugin } = require('vue-loader')
+    plugins: [
+        new htmlWebpackPlugin({
+            template: path.join(__dirname, "./src/index.html"),//指定模板文件路径
+            filename: "index.html", // 设置生成的内存页面名称
+        }),
+        new VueLoaderPlugin(),
+    ],
+
+
+
+
+
+
+
+
+
+
+
 
 
 
