@@ -1,0 +1,10 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+#box{
+    background: url("../images/狗狗.png");
+    width: 500px;
+    height: 500px;
+}
