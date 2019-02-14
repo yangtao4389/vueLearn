@@ -13,8 +13,19 @@ npm i
 直接下载的mui-master，找到里面的example使用
 
 
+改造底部a链接为router-link,并配置to
+
+设置选中高亮：
+router.js中：
+ routes:[
+        // {path:'/home',component:home},
+    ],
+    linkActiveClass:"mui-active", // 覆盖默认的路由，高亮的类,默认的类为router-link-active
 
 
+
+创建路由组件
+放在components
 
 
 
